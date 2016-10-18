@@ -6,14 +6,6 @@
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew install ruby
 
-# Set up
-
-	brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
-	brew install repo
-	echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
-	source ~/.bash_profile
-	brew doctor
-
 # Get some tap
 
 	brew install caskroom/cask/brew-cask
@@ -22,6 +14,17 @@
 	brew tap homebrew/dupes
 	brew tap homebrew/core
 	brew tap caskroom/cask
+
+# Set up
+
+	brew update
+	brew upgrade brew-cask
+	brew cleanup
+	brew cask cleanup
+	brew install repo
+	echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
+	source ~/.bash_profile
+	brew doctor
 
 # Command Line
 
@@ -143,9 +146,6 @@
 	# Spotify
 	brew cask install spotify
 
-	# Wunderlist
-	# brew cask install wunderlist # aparentemente não existe ainda
-
 	# Unarquiver
 	brew cask install the-unarchiver
 
@@ -216,6 +216,7 @@
 	gem install rails --no-ri --no-rdoc
 	gem install compass
 	rails --version
+	osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "w" using command down'
 
 # Finishing Brew
 
