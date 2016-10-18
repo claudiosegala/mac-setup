@@ -1,17 +1,17 @@
 #	Brew Essencial
-#	run using command sh `inst.sh`
-
+#	run using command `sh inst.sh`
 
 # Get a brew on
 
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	brew install ruby #upgrade ruby
+	brew install ruby
 
 # Set up
 
 	brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
 	brew install repo
-
+	echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
+	source ~/.bash_profile
 
 # Get some tap
 
@@ -21,15 +21,14 @@
 	brew tap homebrew/dupes
 	brew tap homebrew/core
 	brew tap caskroom/cask
-	brew tap caskroom/version
 
 # Command Line
 
 	# Git
 	brew install git
 	git --version
-	git config --global user.name "Claudio Segala Rodrigues Silva Filho"
-	git config --global user.email "claudiosegalafilho@gmail.com"
+	# git config --global user.name "Your name"
+	# git config --global user.email "Your Email"
 	git config -l
 	brew install git-crypt 	# to support automatic encryption on pushing to git
 
@@ -42,83 +41,55 @@
 	# Node / NPM
 	brew install node
 	brew install npm
+	npm install -g grunt-cli
 
 # Utilities
-	
 
-	# 
-	brew install nam
-
-	# 
+	#
 	brew install automake
 
-	# 
+	#
 	brew install autoconf
 
-	# 
-	brew install count
-
-	# 
+	#
 	brew install gettext
 
-	# 
+	# System for computational discrete algebra
 	brew install gap
 
-	# 
+	#
 	brew install isl
 
-	# 
-	brew install clove
-
-	# 
+	#
 	brew install libgpg-error
 
-	# 
-	brew install linksba
-
-	# 
-	brew install limbic
-
-	# 
-	brew install lib tool
-
-	# 
+	#
 	brew install libyaml
 
-	# 
-	brew install mfr
-
-	# 
-	brew install nurses
-
-	# 
-	brew install pig-config
-
-	# 
+	#
 	brew install readline
 
 	# SQLite
 	brew install sqlite
 
-	# 
+	#
 	brew install ssh-copy-id
 
-	# supports the awesome mmd formatting system
-	brew install multi markdown
-	
+	# Supports the awesome mmd formatting system
+	brew install multimarkdown
+
 	# Vim
 	brew install vim --override-system-vi
-	
-	#  gives you v4, a more modern version (note you need to add it to approved shells and use chsh to switch to it
-	brew install bash
-	
-	# excellent escape command completion for bash
-	brew install bash-completion
 
+	# Gives you v4, a more modern version (note you need to add it to approved shells and use chsh to switch to it
+	brew install bash
+
+	# Excellent escape command completion for bash
+	brew install bash-completion
 
 	# gives you network bandwidth measurement
 	brew install speedtest_cli
-	
+
 	#for simple high speed file transfer
 	brew install wget
 
@@ -130,15 +101,16 @@
 
 
 # Apps
-	
+
 	#  Sublime 3
-	brew cask install sublime-text3;
-	
+	brew cask install sublime-text
+	ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/sublime # isso permite chamar o sublime pelo terminal
+
 	# Atom
-	brew cask install atom;
-	
+	brew cask install atom
+
 	# Google Chrome
-	brew cask install google-chrome;
+	brew cask install google-chrome
 
 	# Chromium
 	brew cask install chromium
@@ -148,44 +120,40 @@
 
 	# Google Drive
 	brew cask install google-drive
-	
+
 	# VLC
-	brew cask install vlc;
-	
+	brew cask install vlc
+
 	# Skype
-	brew cask install skype;
-	
+	brew cask install skype
+
 	# Dropbox
-	brew cask install dropbox;
-	
+	brew cask install dropbox
+
 	# Utorrent
-	brew cask install utorrent;
-	
-	# Popcorn Time
-	brew tap popcorn-time/homebrew-cask https://git.popcorntime.io/caskroom/homebrew-cask.git;
-	brew cask install popcorn-time;
-	
+	brew cask install utorrent
+
 	# Virtualbox
-	brew cask install virtualbox;
-	
+	brew cask install virtualbox
+
 	# Docker Machine
-	brew install docker-machine;
-	
+	brew install docker-machine
+
 	# Slack
-	brew cask install slack;
+	brew cask install slack
 
 	# Spotify
 	brew cask install spotify
 
 	# Wunderlist
-	brew cask install wunderlist
+	# brew cask install wunderlist # aparentemente não existe ainda
 
 	# Unarquiver
 	brew cask install the-unarchiver
 
 	# AppCleaner
 	brew cask install appcleaner
- 
+
 	# Team Viewer
 	brew cask install teamviewer
 
@@ -204,85 +172,53 @@
 	# Telegram
 	brew cask install telegram
 
-
 # Languages
 
 	# Stylus
 	npm install stylus -g
 
 	# Elm
-	brew install elm 
+	brew install elm
 
 	# PostgresSQL
 	brew install postgresql
 
 	# Elixir
+	brew install erlang
 	brew install elixir
 
 	# Phoenix
 	mix local.hex
-	createuser -d postgres
-	mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.0.3/phoenix_new-1.0.3.ez
-	   		
+	mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.0.0/phoenix_new-1.0.0.ez
+
 	# Java
 	brew update
 	brew cask install java
-	
+
 	# Haskell
+	brew cask install haskell-platform
 
 	# Python 3
-	brew install python 		
+	brew install python  # 2.7
+	brew install python3 # 3
 	sudo easy_install pip
 
 	# My SQL
-	brew install mariadb
-	mysql_install_db
-	/usr/local/bin/mysql_secure_installation
+	brew install mysql
 
-	# RVM
+	# RVM  # dar uma olhada melhor
 	\curl -L https://get.rvm.io | bash -s stable
-	source ~/.bach_profile
+	osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "t" using command down'
 	rvm | head -n 1
 	rvm use ruby --install --default
 	ruby -v
 	gem install rails --no-ri --no-rdoc
+	gem install compass
 	rails --version
- 
+
 # Finishing Brew
 
 	brew update
 	brew upgrade
 	brew cleanup
 	brew doctor
-
-#-------------------------
-# Bash Configuracion
-
-# Put all this inside the bash_profile
-
-# [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM$
-
-# alias cognin="clear && cd && cd Git/front-end && sublime ."
-# alias codetime="clear && cd && cd Dropbox/Code && sublime ."
-# alias uri="clear && cd && cd Dropbox/Code/URI"
-# alias uva="clear && cd && cd Dropbox/Code/UVa"
-# alias codeforces="clear && cd && cd Dropbox/Code/Codeforces"
-# alias compile="clear && g++ -Wall -std=c++11 -g -O2 -o code"
-# alias run="time ./code < in"
-# alias setting="nano ~/.bash_profile && clear && source ~/.bash_profile"
-
-# echo "Tips for better use"
-# echo "cognin - to open cognin"
-# echo "codetime - to get to the right folder and open sublime"
-# echo "uri - to get to uri folder"
-# echo "uva - to get to uva folder"
-# echo "codeforces - to get to codeforces folder"
-# echo "compile -  to compile in C++"
-# echo "run - to get your code running and get the input from in"
-# echo "setting - to modify bash"
-
-
-
-
