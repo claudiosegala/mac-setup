@@ -12,6 +12,7 @@
 	brew install repo
 	echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
 	source ~/.bash_profile
+	brew doctor
 
 # Get some tap
 
@@ -45,34 +46,31 @@
 
 # Utilities
 
-	#
-	brew install automake
-
-	#
+	# Autoconf is an extensible package of M4 macros that produce shell scripts to automatically configure software source code packages
 	brew install autoconf
 
-	#
+	# Automake is a tool for automatically generating Makefile.in files compliant with the GNU Coding Standards
+	brew install automake
+
+	# the GNU `gettext' utilities are a set of tools that provides a framework to help other GNU packages produce multi-lingual messages
 	brew install gettext
 
 	# System for computational discrete algebra
 	brew install gap
 
-	#
+	# Library for manipulating sets and relations of integer points bounded by linear constraints
 	brew install isl
 
-	#
+	# Libgpg-error is a small library that defines common error values for all GnuPG components
 	brew install libgpg-error
 
-	#
+	# YAML 1.1 parser and emitter written in C
 	brew install libyaml
 
-	#
+	# Library that provides a set of functions for use by applications that allow users to edit command lines as they are typed in
 	brew install readline
 
-	# SQLite
-	brew install sqlite
-
-	#
+	# The main OpenSSH page
 	brew install ssh-copy-id
 
 	# Supports the awesome mmd formatting system
@@ -183,6 +181,9 @@
 	# PostgresSQL
 	brew install postgresql
 
+	# SQLite
+	brew install sqlite
+
 	# Elixir
 	brew install erlang
 	brew install elixir
@@ -206,7 +207,7 @@
 	# My SQL
 	brew install mysql
 
-	# RVM  # dar uma olhada melhor
+	# RVM
 	\curl -L https://get.rvm.io | bash -s stable
 	osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "t" using command down'
 	rvm | head -n 1
