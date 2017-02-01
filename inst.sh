@@ -215,6 +215,16 @@
 	ruby -v
 	gem install rails --no-ri --no-rdoc
 	gem install compass
+	gem install jekyll
+	gem install binding_of_caller
+	gem install devise
+	gem install cucumber-rails
+	gem install rspec-rails
+	gem install factory_girl_rails
+	gem install pry-rails
+	gem install simple_form
+	brew install imagemagick		
+	
 	rails --version
 	osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "w" using command down'
 
