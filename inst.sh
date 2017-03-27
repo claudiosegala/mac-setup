@@ -189,8 +189,8 @@
 	brew install elixir
 
 	# Phoenix
-	# mix local.hex
-	# mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.0.0/phoenix_new-1.0.0.ez
+	mix local.hex
+	mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
 
 	# Java
 	brew update
