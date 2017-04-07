@@ -234,3 +234,7 @@
 	brew upgrade
 	brew cleanup
 	brew doctor
+	
+# THIS SECTION IS FOR MAC CURIOSITIES
+# 1 - In Terminal, type "emacs" then command+X and then type "tetris", have fun
+# 2 - In Terminal, type "emacs" then command+X and then type "doctor", feel free to let it all out
