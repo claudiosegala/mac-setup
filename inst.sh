@@ -206,6 +206,11 @@
 
 	# My SQL
 	brew install mysql
+	
+	# Heroku
+	brew install heroku
+	heroku --version
+	heroku login
 
 	# RVM
 	\curl -L https://get.rvm.io | bash -s stable
@@ -213,20 +218,34 @@
 	rvm | head -n 1
 	rvm use ruby --install --default
 	ruby -v
-	gem install rails --no-ri --no-rdoc
+	gem install devisegem install rails --no-ri --no-rdoc
 	gem install compass
 	gem install jekyll
 	gem install binding_of_caller
 	gem install devise
+	gem install cancancan
 	gem install cucumber-rails
 	gem install rspec-rails
+	gem install capybara
+	gem install simplecov
+	gem install rubocop
+	gem install rolify
+	gem install factory_girl
 	gem install factory_girl_rails
 	gem install pry-rails
+	gem install pry-byebug
+	gem install better_errors
+	gem install rspec-rails
+	gem install carrierwave
+	gem install mini_magick
+	gem install sidekiq
+	gem install sucker_punch
 	gem install simple_form
+	gem install elasticsearch
+	gem install brakeman
+	gem install database_cleaner
 	brew install imagemagick		
-	
 	rails --version
-	osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "w" using command down'
 
 # Finishing Brew
 
@@ -234,6 +253,10 @@
 	brew upgrade
 	brew cleanup
 	brew doctor
+	
+# Close window
+
+	osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "w" using command down'
 	
 # THIS SECTION IS FOR MAC CURIOSITIES
 # 1 - In Terminal, type "emacs" then command+X and then type "tetris", have fun
