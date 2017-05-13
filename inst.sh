@@ -1,5 +1,4 @@
 #	Brew Essencial
-#	run using command `sh inst.sh`
 
 # Get a brew on
 
