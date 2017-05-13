@@ -1,5 +1,9 @@
 #	Brew Essencial
 
+# Set up folders
+	
+	mkdir Git
+
 # Get a brew on
 
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
