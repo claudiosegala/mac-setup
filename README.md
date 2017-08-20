@@ -12,3 +12,7 @@ Criei esse script no intuito de automatizar a configuração do meu ambiente mac
   ```bash
   sudo sh inst.sh
   ```
+
+## Tips
+
++ [Here](https://mattbrictson.com/sublime-text-3-recommendations) some customizations to do in Sublime 3
