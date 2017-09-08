@@ -52,6 +52,10 @@
 
 # Utilities
 
+	# Install Latex
+	brew cask install mactex
+	brew cask install texmaker
+
 	# Autoconf is an extensible package of M4 macros that produce shell scripts to automatically configure software source code packages
 	brew install autoconf
 
