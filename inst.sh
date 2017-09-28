@@ -1,8 +1,8 @@
 #	Brew Essencial
 
 # Set up folders
-	
-	mkdir Git
+	cd
+	mkdir Projects
 
 # Get a brew on
 
@@ -11,8 +11,8 @@
 
 # Get some tap
 
-	brew install caskroom/cask/brew-cask
 	brew tap caskroom/versions
+	brew tap homebrew/services
 	brew tap homebrew/science
 	brew tap homebrew/dupes
 	brew tap homebrew/core
@@ -48,7 +48,6 @@
 	# Node / NPM
 	brew install node
 	brew install npm
-	npm install -g grunt-cli
 
 # Utilities
 
@@ -115,16 +114,16 @@
 	ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/sublime # isso permite chamar o sublime pelo terminal
 
 	# Atom
-	brew cask install atom
+	# brew cask install atom
 
 	# Google Chrome
 	brew cask install google-chrome
 
 	# Chromium
-	brew cask install chromium
+	# brew cask install chromium
 
 	# Firefox
-	brew cask install firefox
+	# brew cask install firefox
 
 	# Google Drive
 	brew cask install google-drive
@@ -139,13 +138,13 @@
 	brew cask install dropbox
 
 	# Utorrent
-	brew cask install utorrent
+	# brew cask install utorrent
 
 	# Virtualbox
-	brew cask install virtualbox
+	# brew cask install virtualbox
 
 	# Docker Machine
-	brew install docker-machine
+	# brew install docker-machine
 
 	# Slack
 	brew cask install slack
@@ -166,7 +165,7 @@
 	brew cask install aquamacs
 
 	# Gimp
-	brew cask install gimp
+	# brew cask install gimp
 
 	# Android File Transfer
 	brew cask install android-file-transfer
@@ -180,10 +179,10 @@
 # Languages
 
 	# Stylus
-	npm install stylus -g
+	# npm install stylus -g
 
 	# Elm
-	brew install elm
+	# brew install elm
 
 	# PostgresSQL
 	brew install postgresql
@@ -192,12 +191,12 @@
 	brew install sqlite
 
 	# Elixir
-	brew install erlang
-	brew install elixir
+	# brew install erlang
+	# brew install elixir
 
 	# Phoenix
-	mix local.hex
-	mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+	# mix local.hex
+	# mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
 
 	# Java
 	brew update
@@ -215,44 +214,43 @@
 	brew install mysql
 	
 	# Heroku
-	brew install heroku
-	heroku --version
-	heroku login
+	# brew install heroku
+	# heroku --version
+	# heroku login
 
 	# RVM
 	\curl -L https://get.rvm.io | bash -s stable
 	osascript -e 'tell application "Terminal" to activate' -e 'tell application "System Events" to tell process "Terminal" to keystroke "t" using command down'
 	rvm | head -n 1
 	rvm use ruby --install --default
-	ruby -v
-	gem install devisegem install rails --no-ri --no-rdoc
-	gem install compass
-	gem install jekyll
-	gem install binding_of_caller
-	gem install devise
-	gem install cancancan
-	gem install cucumber-rails
-	gem install rspec-rails
-	gem install capybara
-	gem install simplecov
-	gem install rubocop
-	gem install rolify
-	gem install factory_girl
-	gem install factory_girl_rails
-	gem install pry-rails
-	gem install pry-byebug
-	gem install better_errors
-	gem install rspec-rails
-	gem install carrierwave
-	gem install mini_magick
-	gem install sidekiq
-	gem install sucker_punch
-	gem install simple_form
-	gem install elasticsearch
-	gem install brakeman
-	gem install database_cleaner
-	brew install imagemagick		
-	rails --version
+	# gem install devisegem install rails --no-ri --no-rdoc
+	# gem install compass
+	# gem install jekyll
+	# gem install binding_of_caller
+	# gem install devise
+	# gem install cancancan
+	# gem install cucumber-rails
+	# gem install rspec-rails
+	# gem install capybara
+	# gem install simplecov
+	# gem install rubocop
+	# gem install rolify
+	# gem install factory_girl
+	# gem install factory_girl_rails
+	# gem install pry-rails
+	# gem install pry-byebug
+	# gem install better_errors
+	# gem install rspec-rails
+	# gem install carrierwave
+	# gem install mini_magick
+	# gem install sidekiq
+	# gem install sucker_punch
+	# gem install simple_form
+	# gem install elasticsearch
+	# gem install brakeman
+	# gem install database_cleaner
+	# brew install imagemagick		
+	# rails --version
 
 # Finishing Brew
 
