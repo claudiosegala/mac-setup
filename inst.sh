@@ -8,6 +8,9 @@
 
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew install ruby
+	
+# Set San Francisco as Systems font
+	ruby -e "$(curl -fsSL https://raw.github.com/wellsriley/YosemiteSanFranciscoFont/master/install)"
 
 # Get some tap
 
@@ -157,6 +160,9 @@
 
 	# AppCleaner
 	brew cask install appcleaner
+	
+	# Cakebrew
+	brew cask install cakebrew
 
 	# Team Viewer
 	brew cask install teamviewer
@@ -197,6 +203,9 @@
 	# Phoenix
 	# mix local.hex
 	# mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+	
+	# Go
+	# brew install go
 
 	# Java
 	brew update
