@@ -3,8 +3,12 @@
 #############################################################################################
 
 	# Change Prompt
-	export PS1="________________________________________________________________________________\n| \w @ \h (\u) \n| => "
-	export PS2=": "
+	# link: https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
+	# export PS1="________________________________________________________________________________\n| \w @ \h (\u) \n: "
+	# export PS1="\n\n| \w @ \h (\u) \n:"
+	# export PS1="\n\d \A \w @ \h (\u) \n:"
+	export PS1="\n: "
+	export PS2="\n: "
 
 	# Brew
 	export PATH="/usr/local/sbin:$PATH"
