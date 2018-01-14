@@ -283,8 +283,6 @@
 	# compile: compile with C++11 
 	alias compile='g++ -Wall -g -stdc++=11'
 
-	alias run=
-
 
 
 
