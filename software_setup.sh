@@ -74,7 +74,7 @@
 	brew install libgpg-error
 
 	# YAML 1.1 parser and emitter written in C
-	brew install libyaml
+	# brew install libyaml
 
 	# Library that provides a set of functions for use by applications that allow users to edit command lines as they are typed in
 	brew install readline
@@ -83,7 +83,7 @@
 	brew install ssh-copy-id
 
 	# Supports the awesome mmd formatting system
-	brew install multimarkdown
+	# brew install multimarkdown
 
 	# Vim
 	brew install vim --override-system-vi
@@ -128,20 +128,28 @@
 	brew install npm
 
 	# Go
-	brew install go
+	# brew install go
+
+	# Rust
+	# brew install rust
+
+	# Haskell
+	# brew cask install haskell-platform
 
 	# Java
-	brew update
-	brew cask install java
+	# brew update
+	# brew cask install java
 
-	# PostgresSQL
-	brew install postgresql
+	# SQL
+	brew install mysql # MySQL
+	# brew install sqlite # SQLite
+	# brew install postgresql # PostgresSQL
 
-	# SQLite
-	# brew install sqlite
+	# Stylus
+	# npm install stylus -g
 
-	# My SQL
-	# brew install mysql
+	# Elm
+	# brew install elm
 
 	# RVM - Rails
 	# \curl -L https://get.rvm.io | bash -s stable
@@ -176,15 +184,6 @@
 	# gem install brakeman
 	# gem install database_cleaner
 	# brew install imagemagick		
-
-	# Haskell
-	# brew cask install haskell-platform
-
-	# Stylus
-	# npm install stylus -g
-
-	# Elm
-	# brew install elm
 
 	# Elixir
 	# brew install erlang
@@ -224,7 +223,7 @@
 	brew cask install android-file-transfer
 
 	# Dropbox
-	brew cask install dropbox
+	# brew cask install dropbox
 
 	# VLC
 	brew cask install vlc

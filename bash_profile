@@ -1,6 +1,6 @@
-#############################################################################################
+###
 # ENVIRONMENT CONFIGURATION
-#############################################################################################
+###
 
 	# Change Prompt
 	# link: https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
@@ -13,9 +13,9 @@
 	# Brew
 	export PATH="/usr/local/sbin:$PATH"
 
-#############################################################################################
+###
 # MAKE TERMINAL BETTER
-#############################################################################################
+###
 
 	# mcd:          Makes new Dir and jumps inside
 	mcd () { mkdir -p "$1" && cd "$1"; }     
@@ -91,9 +91,9 @@
 	# lr:  Full Recursive Directory Listing
 	alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
 
-#############################################################################################
+###
 # FILE AND FOLDER MANAGEMENT
-#############################################################################################
+###
 
 	# zipf:         To create a ZIP archive of a folder
 	zipf () { zip -r "$1".zip "$1" ; }    
@@ -146,9 +146,9 @@
 	#  screensaverDesktop: Run a screensaver on the Desktop
 	alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
 
-#############################################################################################
+###
 # SEARCHING
-#############################################################################################
+###
 
 	# ff:       Find file under the current directory
 	ff () { /usr/bin/find . -name "$@" ; }
@@ -165,9 +165,9 @@
 	# qfind:    Quickly search for file
 	alias qfind="find . -name "
 
-#############################################################################################
+###
 # PROCESS MANAGEMENT
-#############################################################################################
+###
 
 	# findPid: find out the pid of a specified process
 	#       Note that the command name can be specified via a regex
@@ -193,9 +193,9 @@
 	#     http://www.macosxhints.com/article.php?story=20060816123853639
 	alias ttop="top -R -F -s 10 -o rsize"
 
-#############################################################################################
+###
 # NETWORK
-#############################################################################################
+###
 
 	# ii:  display useful host related informaton
 	ii() {
@@ -237,9 +237,9 @@
 	# openPorts:    All listening connections
 	alias openPorts='sudo lsof -i | grep LISTEN'
 
-#############################################################################################
+###
 # ICPC 
-#############################################################################################
+###
 
 	# new_contest: Create a folder with many files for the contest           
 	# Example: new_contest aula2
@@ -286,17 +286,3 @@
 
 	# compile: compile with C++11 
 	alias compile='g++ -Wall -g -stdc++=11'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
