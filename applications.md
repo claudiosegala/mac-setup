@@ -1,8 +1,9 @@
 # Recommended Applications for Mac
 
+## Coding
+
++ Sublime: faaaaaaast and light and cool editing code
 + Sequel Pro: manage your mysql database
-+ Cheatsheet: show the shortcuts by holding the COMMAND	
-+ SmallPDF: manage your pdf files
 
 ## Editing
 
@@ -20,3 +21,5 @@
 ## Stuff
 
 + Vanilla: hide stuff on the top bar on mac
++ SmallPDF: manage your pdf files
++ Cheatsheet: show the shortcuts by holding the COMMAND	
