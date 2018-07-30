@@ -1,4 +1,4 @@
-# bash_scripts
+# macOS Setup
 
 This is a series of script to set up my macOS machine.
 
