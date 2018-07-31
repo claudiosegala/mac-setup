@@ -193,10 +193,6 @@
 #Apps Setup
 #############################################################################################
 
-	#  Sublime 3
-	brew cask install sublime-text
-	ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/sublime # isso permite chamar o sublime pelo terminal
-
 	# Atom
 	# brew cask install atom
 
