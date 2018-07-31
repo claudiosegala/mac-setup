@@ -16,8 +16,6 @@
 	# Get some tap repositories
 	brew tap caskroom/versions
 	brew tap homebrew/services
-	brew tap homebrew/science
-	brew tap homebrew/dupes
 	brew tap homebrew/core
 	brew tap caskroom/cask
 
