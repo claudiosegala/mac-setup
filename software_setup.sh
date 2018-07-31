@@ -81,7 +81,7 @@
 	# brew install multimarkdown
 
 	# Vim
-	brew install vim --override-system-vi
+	brew install vim --with-override-system-vi
 
 	# Gives you v4, a more modern version (note you need to add it to approved shells and use chsh to switch to it
 	brew install bash
@@ -121,6 +121,7 @@
 	# Node / NPM
 	brew install node
 	brew install npm
+	brew install yarn
 
 	# Go
 	# brew install go
