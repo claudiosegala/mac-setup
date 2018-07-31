@@ -62,9 +62,6 @@
 	# the GNU `gettext' utilities are a set of tools that provides a framework to help other GNU packages produce multi-lingual messages
 	brew install gettext
 
-	# System for computational discrete algebra
-	brew install gap
-
 	# Library for manipulating sets and relations of integer points bounded by linear constraints
 	brew install isl
 
