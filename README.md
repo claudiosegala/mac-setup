@@ -8,7 +8,7 @@ sh "script_name"
 ```
 
 + [**software_setup.sh**](https://github.com/claudiosegala/macOS-setup/blob/master/software_setup.sh): using brew and some others install the languages you need, configure git, install some software and more.
-+ [**terminal_setup.sh**](https://github.com/claudiosegala/macOS-setup/blob/master/terminal_setup.sh): appends what is written in bash_profile.
++ [**terminal_setup.sh**](https://github.com/claudiosegala/macOS-setup/blob/master/terminal_setup.sh): appends what is written in bash_profile. Use it to setup your favorite alias (I include some suggestions in there).
 + [**bits_lib_setup.sh**](https://github.com/claudiosegala/macOS-setup/blob/master/bits_lib_setup.sh): install bits C++ library. This library is useful for those that participate in Competitive Programming.
 
 ## Troubleshooting
