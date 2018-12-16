@@ -294,7 +294,7 @@ test: default TEST
 
 program:
 	-clear
-	-gcc -Wall -std=c++11 -O3 -g code.cpp -o code
+	-gcc -Wall -std=c++11 -O3 -g -DDEBUG code.cpp -o code
 
 RUN:
 	-clear
@@ -309,17 +309,3 @@ clean:
 		cd ..
 		done
 	}
-
-	run () {
-		if [ $# -eq 1 ]; then
-			g++ -std=c++11 -O2 -Wall -DDEBUG $1 && ./a.out
-		else
-			g++ -std=c++11 -O2 -Wall -DDEBUG $1 && ./a.out < $2
-		fi
-	}
-
-	# compile: compile with C++11 
-	alias compile='g++ -Wall -g -stdc++=11'export PATH="/usr/local/sbin:$PATH"
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
