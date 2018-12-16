@@ -18,13 +18,13 @@
 ###
 
 	# mcd:          Makes new Dir and jumps inside
-	mcd () { mkdir -p "$1" && cd "$1"; }     
+	mcd () { mkdir -p "$1" && cd "$1"; }
 
 	# trash:        Moves a file to the MacOS trash
-	trash () { command mv "$@" ~/.Trash ; }  
+	trash () { command mv "$@" ~/.Trash ; }
 
 	# ql:           Opens any file in MacOS Quicklook Preview
-	ql () { qlmanage -p "$*" >& /dev/null; } 
+	ql () { qlmanage -p "$*" >& /dev/null; }
 
 	# mans:   Search manpage given in argument '1' for term given in argument '2' (case insensitive)
 	# displays paginated result with colored search terms and two lines surrounding each hit.
@@ -50,13 +50,13 @@
 	}
 
 	# Preferred 'cp' implementation
-	alias cp='cp -iv'                        
+	alias cp='cp -iv'
 
 	# Preferred 'mv' implementation
-	alias mv='mv -iv'                        
+	alias mv='mv -iv'
 
 	# Preferred 'mkdir' implementation
-	alias mkdir='mkdir -pv'                  
+	alias mkdir='mkdir -pv'
 
 	# Preferred 'ls' implementation
 	alias ll='ls -FGlAhp'                    
@@ -238,7 +238,7 @@
 	alias openPorts='sudo lsof -i | grep LISTEN'
 
 ###
-# ICPC 
+# ICPC
 ###
 
 	# new_contest: Create a folder with many files for the contest           
@@ -246,15 +246,19 @@
 	new_contest () {
 		mkdir $1
 		cd $1
-		touch {a..z}.cpp
-		for f in {a..z}.cpp
+		mkdir {a..z}
+		for f in {a..z}
 		do
+            cd $f
+            touch input
+            touch makefile
+            touch code.cpp
 			echo "#include <bits/stdc++.h>
 
 using namespace std;
 
 #ifdef DEBUG
-#define W(x)         cerr << "\033[31m" << #x << "=" << x << "\033[0m" << "\n";
+#define W(x)         cerr << \"\033[31m\" << #x << \"=\" << x << \"\033[0m\" << \"\n\";
 #else
 #define W(x)
 #endif
@@ -280,17 +284,42 @@ int main() {
 	//ios::sync_with_stdio(false);
 
 	return 0;
-}" > $f
+}" > code.cpp
+		echo ".PHONY: default all clean
+
+default: program
+all: default
+run: default RUN
+test: default TEST
+
+program:
+	-clear
+	-gcc -Wall -std=c++11 -O3 -g code.cpp -o code
+
+RUN:
+	-clear
+	-./code
+
+TEST:
+	-clear
+	-./code < input
+
+clean:
+	-rm -f code" > makefile
+		cd ..
 		done
 	}
 
 	run () {
 		if [ $# -eq 1 ]; then
-			g++ -Wall -Wextra -g -std=c++11 -O2 -DDEBUG $1 && ./a.out
+			g++ -std=c++11 -O2 -Wall -DDEBUG $1 && ./a.out
 		else
-			g++ -Wall -Wextra -g -std=c++11 -O2 -DDEBUG $1 && ./a.out < $2
+			g++ -std=c++11 -O2 -Wall -DDEBUG $1 && ./a.out < $2
 		fi
 	}
 
 	# compile: compile with C++11 
-	alias compile='g++ -Wall -g -stdc++=11'
+	alias compile='g++ -Wall -g -stdc++=11'export PATH="/usr/local/sbin:$PATH"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
