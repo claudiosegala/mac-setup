@@ -22,7 +22,6 @@
 	# Set up
 	brew update
 	brew cleanup
-	brew cask cleanup
 	brew install repo
 	echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
 	source ~/.bash_profile
@@ -74,6 +73,9 @@
 	# Library that provides a set of functions for use by applications that allow users to edit command lines as they are typed in
 	brew install readline
 
+	# Open SSH
+	brew install openssh
+
 	# The main OpenSSH page
 	brew install ssh-copy-id
 
@@ -95,10 +97,8 @@
 	#for simple high speed file transfer
 	brew install wget
 
-	# Open SSH
-	brew install openssh
-
 	# Make to unite libraries
+	brew install cmake
 	brew install make
 
 	# Heroku
@@ -114,9 +114,21 @@
 	brew install ruby
 
 	# Python 3
-	brew install python  # 2.7
 	brew install python3 # 3
-	sudo easy_install pip
+	brew install pip3
+	pip3 install virtualenv virtualenvwrapper
+	echo "
+##
+# virtualenv and virtualenvwrapper
+## 
+
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
+	" >> ~/.bash_profile
+	source ~/.bash_profile
+	#sudo easy_install pip
 
 	# Node / NPM
 	brew install node
