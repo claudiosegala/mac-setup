@@ -294,7 +294,7 @@ test: default TEST
 
 program:
 	-clear
-	-gcc -Wall -std=c++11 -O3 -g -DDEBUG code.cpp -o code
+	-g++ -Wall -std=c++11 -O3 -g -DDEBUG code.cpp -o code
 
 RUN:
 	-clear
