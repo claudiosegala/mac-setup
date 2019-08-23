@@ -54,17 +54,19 @@ pip3 install virtualenv virtualenvwrapper
 #brew install docker-machine
 
 # Config paths
-echo \
-"# python env
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh" \ 
->> ~/.bash_profile
+cat files/bash_profile_python_env >> ~/.bash_profile
+cat files/bash_profile_go_env >> ~/.bash_profile
 source ~/.bash_profile
 
 # Config git
 git config --global user.name "Claudio Segala Rodrigues Silva Filho"
 git config --global user.email "claudiosegalafilho@gmail.com"
+
+# Config go
+mkdir ~/.go
+mkdir ~/.go/bin
+mkdir ~/.go/src
+echo
 
 # Finishing setup
 brew doctor
