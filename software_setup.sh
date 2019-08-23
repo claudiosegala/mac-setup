@@ -3,6 +3,7 @@ cd && mkdir Projects
 
 # Get a brew on
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo "export PATH="/usr/local/sbin:$PATH" # brew" >> ~/.bash_profile && source ~/.bash_profile
 
 # Get some repositories
 brew tap homebrew/code
@@ -47,15 +48,12 @@ pip3 install virtualenv virtualenvwrapper
 #brew install docker-machine
 
 # Config paths
-echo "
-# repo
-export PATH="/usr/local/sbin:$PATH"
-
-# virtualenv and virtualenvwrapper 
+echo \
+"# python env
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
-" >> ~/.bash_profile
+source /usr/local/bin/virtualenvwrapper.sh" \ 
+>> ~/.bash_profile
 source ~/.bash_profile
 
 # Config git
