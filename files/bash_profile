@@ -1,0 +1,127 @@
+# Change Prompt
+# link: https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
+export PS1="\n: "
+export PS2="\n: "
+
+# Go back 1 directory level
+alias ..='cd ../'
+
+# Quickly search for file
+alias qfind="find . -name "
+
+# Echo all executable Paths
+alias path='echo -e ${PATH//:/\\n}'
+
+# Full Recursive Directory Listing
+alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+
+ # preferred 'cp' implementation
+alias cp='cp -iv'
+
+# Preferred 'mv' implementation
+alias mv='mv -iv' 
+
+# Preferred 'mkdir' implementation
+alias mkdir='mkdir -pv' 
+
+# Preferred 'ls' implementation
+alias ll='ls -FGlAhp' 
+
+# Recursively delete .DS_Store files
+alias cleanupDS='find . -type f -name '*.DS_Store' -ls -delete' 
+
+# Find memory hogs
+alias memHogsTop='top -l 1 -o rsize | head -20' 
+
+# Find memory hogs
+alias memHogsPs='ps wwaxm -o pid,stat,vsize,rss,time,command | head -10' 
+
+# Find CPU hogs
+alias cpu_hogs='ps wwaxr -o pid,stat,%cpu,time,command | head -10' 
+
+# Recommended 'top' invocation to minimize resources (http://www.macosxhints.com/article.php?story=20060816123853639)
+alias ttop='top -R -F -s 10 -o rsize'
+
+# Show all open TCP/IP sockets
+alias netCons='lsof -i' 
+
+# Makes new Dir and jumps inside
+mcd () { mkdir -p "$1" && cd "$1"; }
+
+# Moves a file to the MacOS trash
+trash () { command mv "$@" ~/.Trash ; }
+
+# Opens any file in MacOS Quicklook Preview
+ql () { qlmanage -p "$*" >& /dev/null; }
+
+# Search manpage given in argument '1' for term given in argument '2' (case insensitive) displays paginated result with colored search terms and two lines surrounding each hit. Example: mans mplayer codec
+mans () { man $1 | grep -iC2 --color=always $2 | less; }
+
+# showa: to remind yourself of an alias (given some part of it)
+showa () { /usr/bin/grep --color=always -i -a1 $@ ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc; }
+	
+# To create a ZIP archive of a folder
+zipf () { zip -r "$1".zip "$1" ; }
+
+# Extract most know archives with one command
+extract () {
+	if [ -f $1 ] ; then
+	  case $1 in
+		*.tar.bz2)   tar xjf $1     ;;
+		*.tar.gz)    tar xzf $1     ;;
+		*.bz2)       bunzip2 $1     ;;
+		*.rar)       unrar e $1     ;;
+		*.gz)        gunzip $1      ;;
+		*.tar)       tar xf $1      ;;
+		*.tbz2)      tar xjf $1     ;;
+		*.tgz)       tar xzf $1     ;;
+		*.zip)       unzip $1       ;;
+		*.Z)         uncompress $1  ;;
+		*.7z)        7z x $1        ;;
+		*)     echo "'$1' cannot be extracted via extract()" ;;
+		 esac
+	 else
+		 echo "'$1' is not a valid file"
+	 fi
+}
+
+# Find file under the current directory
+ff () { /usr/bin/find . -name "$@" ; }
+
+# Find file whose name starts with a given string
+ffs () { /usr/bin/find . -name "$@"'*' ; }
+
+# Find file whose name ends with a given string
+ffe () { /usr/bin/find . -name '*'"$@" ; }
+
+# Find out the pid of a specified process. Note that the command name can be specified via a regex. E.g. findPid '/d$/' finds pids of all processes with names ending in 'd'. Without the 'sudo' it will only find processes of the current user
+findPid () { lsof -t -c "$@" ; }
+
+# List processes owned by my user:
+my_ps() { ps $@ -u $USER -o pid,%cpu,%mem,start,time,bsdtime,command ; }
+
+# Display useful host related informaton
+ii() {
+	echo -e "\nYou are logged on ${RED}$HOST"
+	echo -e "\nAdditionnal information:$NC " ; uname -a
+	echo -e "\n${RED}Users logged on:$NC " ; w -h
+	echo -e "\n${RED}Current date :$NC " ; date
+	echo -e "\n${RED}Machine stats :$NC " ; uptime
+	echo -e "\n${RED}Current network location :$NC " ; scselect
+	echo -e "\n${RED}Public facing IP Address :$NC " ;myip
+	#echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+	echo
+}
+
+# Create a folder with many files for the contest. Example: new_contest aula2
+new_contest () {
+	mcd $1
+	for f in {a..z}
+	do
+		mcd $f
+		touch input
+		cp ~/.icpc/code.cpp .
+		cp ~/.icpc/makefile .
+		cd ..
+	done
+}

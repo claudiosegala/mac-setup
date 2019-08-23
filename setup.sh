@@ -1,13 +1,18 @@
+# Set up competitive programming stuff
+mkdir ~/../../usr/local/include/bits && touch ~/../../usr/local/include/bits/stdc++.h
+cat files/stdc++.h >> ~/../../usr/local/include/bits/stdc++.h
+
+mkdir ~/.icpc
+cp files/code.cpp ~/.icpc
+cp files/makefile ~/.icpc
+cp files/stdc++.h ~/.icpc
+
 # Setup bash_profile
-cat bash_config >> ~/.bash_profile
+cat files/bash_profile >> ~/.bash_profile
 source ~/.bash_profile
 
-# Set up bits/stdc++
-cd && cd ../../usr/local/include && mkdir bits && cd bits && touch stdc++.h
-cat files/icpc_stdc++.h >> stdc++.h
-
-# Set git projects folder
-cd && mkdir Projects
+# Set default folder
+mkdir ~/Projects
 
 # Get a brew on
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
