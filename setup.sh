@@ -1,3 +1,11 @@
+# Setup bash_profile
+cat bash_config >> ~/.bash_profile
+source ~/.bash_profile
+
+# Set up bits/stdc++
+cd && cd ../../usr/local/include && mkdir bits && cd bits && touch stdc++.h
+cat files/icpc_stdc++.h >> stdc++.h
+
 # Set git projects folder
 cd && mkdir Projects
 
@@ -19,27 +27,20 @@ brew cask install vlc
 brew cask install spotify
 brew cask install the-unarchiver
 brew cask install appcleaner
-brew cask install skype
 brew cask install slack
 brew cask install whatsapp
 brew cask install telegram
 brew cask install cakebrew
 
-brew install repo # for android development
 brew install git git-crypt # git-crypt make support for automatic encryption on pushing to git
 brew install gcc
-brew install cunit
-brew install libyaml # YAML 1.1 parser and emitter written in C
-brew install readline # library that provides a set of functions for use by applications that allow users to edit command lines as they are typed in
 brew install htop # better 'top'
 brew install openssh # Open SSH
 brew install ssh-copy-id # The main OpenSSH page
 brew install vim --with-override-system-vi
 brew install bash # Latest version of bash
 brew install bash-completion # Excelent escape command completion for bash
-brew install cmake # to generate makefile
 brew install make # for makefile
-brew cask install texmaker # Latex
 brew install go
 brew install node npm
 brew install mysql # sqlite postgresql
@@ -61,11 +62,4 @@ git config --global user.name "Claudio Segala Rodrigues Silva Filho"
 git config --global user.email "claudiosegalafilho@gmail.com"
 
 # Finishing setup
-brew update
-brew cleanup
-brew upgrade
-brew cleanup
 brew doctor
-
-# Close Window
-osascript -e 'tell application "System Events" to tell process "Terminal" to keystroke "w" using command down' &&
