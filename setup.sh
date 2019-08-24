@@ -47,6 +47,7 @@ brew install bash # Latest version of bash
 brew install bash-completion # Excelent escape command completion for bash
 brew install make # for makefile
 brew install go
+brew install ruby
 brew install node npm
 brew install mysql # sqlite postgresql
 brew install python3 pip3
@@ -61,6 +62,13 @@ source ~/.bash_profile
 # Config git
 git config --global user.name "Claudio Segala Rodrigues Silva Filho"
 git config --global user.email "claudiosegalafilho@gmail.com"
+
+# Config ruby
+\curl -L https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm | head -n 1
+rvm use ruby --install --default
+gem install jekyll
 
 # Config go
 mkdir ~/.go
