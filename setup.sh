@@ -86,7 +86,7 @@ gem install jekyll
 mcd ~/Projects\ Golang
 mkdir bin
 mkdir src
-echo "export GOPATH=\"$HOME/Projects\ Golang\"" >> ~/.bash_profile
+echo "export GOPATH=\"$HOME/Projects Golang\"" >> ~/.bash_profile
 
 # Finishing setup
 brew doctor
