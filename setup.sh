@@ -11,7 +11,7 @@ cp files/stdc++.h ~/.icpc
 cat files/bash_profile >> ~/.bash_profile
 source ~/.bash_profile
 
-# Set default folder
+# Set dev folder
 mkdir ~/Projects
 
 # Get a brew on
@@ -83,10 +83,10 @@ rvm use ruby --install --default
 gem install jekyll
 
 # Config go
-mkdir ~/.go
-mkdir ~/.go/bin
-mkdir ~/.go/src
-echo
+mcd ~/Projects\ Golang
+mkdir bin
+mkdir src
+echo "export GOPATH=\"$HOME/Projects\ Golang\"" >> ~/.bash_profile
 
 # Finishing setup
 brew doctor
