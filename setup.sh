@@ -71,7 +71,7 @@ git config --global alias.st status
 git config --global alias.ff 'merge --ff-only'
 git config --gloabl alias.undo 'reset --soft HEAD^'
 git config --global alias.stash-all 'stash save --include-untracked'
-git config --global alias.glog 'log --graph --pretty=format:\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\''
+git config --global alias.glog "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 #git config --global commit.gpgSign true
 git config --global core.editor "code --wait"
 
