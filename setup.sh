@@ -74,6 +74,7 @@ git config --global alias.stash-all 'stash save --include-untracked'
 git config --global alias.glog "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 #git config --global commit.gpgSign true
 git config --global core.editor "code --wait"
+echo .DS_Store >> ~/.gitignore_global
 
 # Config ruby
 \curl -L https://get.rvm.io | bash -s stable
