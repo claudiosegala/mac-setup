@@ -19,6 +19,8 @@ sh setup.sh
 + __Stremio__ for streaming
 + __Vanilla__ for hiding the icons on the top bar on mac
 + __Cheatsheet__ for showing a cheatsheet of commands by holding cmd on mac
++ __Dash__ for showing an offline documentation
++ __Flycut__ for managing your clipboard
 
 ## Observations
 
