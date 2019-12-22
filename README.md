@@ -22,6 +22,10 @@ sh setup.sh
 + __Dash__ for showing an offline documentation
 + __Flycut__ for managing your clipboard
 
+### One Time Use
+
++ __Gemini 2__ for finding duplicate files
+
 ## Observations
 
 This uses `brew` to install a lot of the software. So please run these commands once in a while.
