@@ -26,6 +26,10 @@ sh setup.sh
 
 + __Gemini 2__ for finding duplicate files
 
+## Tips
+
++ [Tips and Tricks for Visual Studio](https://www.youtube.com/watch?v=tnSnVlbKtMk)
+
 ## Observations
 
 This uses `brew` to install a lot of the software. So please run these commands once in a while.
