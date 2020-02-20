@@ -21,10 +21,12 @@ sh setup.sh
 + __Cheatsheet__ for showing a cheatsheet of commands by holding cmd on mac
 + __Dash__ for showing an offline documentation
 + __Flycut__ for managing your clipboard
++ __Coconut Battery__ for managing your battery status
 
 ### One Time Use
 
 + __Gemini 2__ for finding duplicate files
++ __Duplicate Photos Finder__ for finding duplicate images
 
 ## Tips
 
