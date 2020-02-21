@@ -39,7 +39,7 @@ brew cask install cakebrew # brew GUI
 brew cask install appcleaner # remove apps
 brew cask install android-file-transfer # android manipulation
 
-brew install git git-crypt # git-crypt make support for automatic encryption on pushing to git
+brew install git git-lfs git-crypt # git-crypt make support for automatic encryption on pushing to git
 brew install gcc
 brew install htop # better 'top'
 brew install openssh # Open SSH
