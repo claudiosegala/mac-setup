@@ -31,6 +31,7 @@ sh setup.sh
 ## Tips
 
 + [Tips and Tricks for Visual Studio](https://www.youtube.com/watch?v=tnSnVlbKtMk)
++ [Improving Security of your Mac](https://www.bejarano.io/hardening-macos/)
 
 ## Observations
 
