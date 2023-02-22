@@ -24,6 +24,7 @@ mkdir ~/Projects
 
 # Get a brew on
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/claudiosegalarodriguessilvafilho/.zprofile eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Install Applications
 brew install --cask visual-studio-code # code editor
