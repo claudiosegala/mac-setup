@@ -73,7 +73,7 @@ brew install deno
 # brew install node npm
 
 # Install Python 
-# brew install python3 pip3
+# brew install python3 pipx
 # pip3 install virtualenv virtualenvwrapper
 # cat files/bash_profile_python_env >> ~/.bash_profile
 
