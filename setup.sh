@@ -45,6 +45,7 @@ brew install --cask google-drive # cloud backup
 # Install Tools
 brew install just
 brew install git
+brew install --cask typewhisper/tap/typewhisper
 
 # Install Deno
 brew install deno
