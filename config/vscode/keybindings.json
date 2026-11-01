@@ -1,0 +1,18 @@
+[
+  {
+    "key": "cmd+alt+j",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.terminal.focus",
+        "workbench.action.toggleMaximizedPanel"
+      ]
+    },
+    "when": "!panelMaximized"
+  },
+  {
+    "key": "cmd+alt+j",
+    "command": "workbench.action.terminal.focus",
+    "when": "panelMaximized"
+  }
+]

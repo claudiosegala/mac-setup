@@ -1,0 +1,14 @@
+# Languages, formatters, shell and AI. Remove lines to opt out.
+ms-python.python
+ms-python.vscode-pylance
+ms-python.black-formatter
+esbenp.prettier-vscode
+dbaeumer.vscode-eslint
+ms-vscode.cpptools
+rust-lang.rust-analyzer
+golang.go
+yzhang.markdown-all-in-one
+timonwong.shellcheck
+foxundermoon.shell-format
+OpenAI.chatgpt
+Anthropic.claude-code

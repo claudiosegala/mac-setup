@@ -1,44 +1,51 @@
-# macOS Setup
+# macOS setup
 
-This is a series of script to set up my macOS machine.
-
-## Use
+Install tools and apps, then configure your development environment:
 
 ```bash
-sh setup.sh
+git clone https://github.com/claudiosegala/mac-setup.git
+cd mac-setup
+bash setup-mac.sh
 ```
 
-## Application Suggestions
+Run as your normal macOS user. Expect administrator authentication; some app installers may request it again.
+Preview without changing your Mac: `bash setup-mac.sh --dry-run`.
 
-+ __Visual Code__ for coding
-+ __Typora__ for markdown editing
-+ __Notion__ for organizing everything
-+ __Slack__ for work communication
-+ __Discord__ for work and fun communication
-+ __Telegram__ for general communication
-+ __Stremio__ for streaming
-+ __Vanilla__ for hiding the icons on the top bar on mac
-+ __Cheatsheet__ for showing a cheatsheet of commands by holding cmd on mac
-+ __Dash__ for showing an offline documentation
-+ __Flycut__ for managing your clipboard
-+ __Coconut Battery__ for managing your battery status
+## Customize
 
-### One Time Use
+- `Brewfile`: apps and command-line tools. Comment out unwanted entries; declare third-party taps explicitly.
+- `config/options.sh`: Git identity, Python version, optional Rust/GCC, and installation directories.
+- `config/`: VS Code settings/extensions, Ghostty preferences, and the portable C++ starter.
 
-+ __Gemini 2__ for finding duplicate files
-+ __Duplicate Photos Finder__ for finding duplicate images
-
-## Tips
-
-+ [Tips and Tricks for Visual Studio](https://www.youtube.com/watch?v=tnSnVlbKtMk)
-+ [Improving Security of your Mac](https://www.bejarano.io/hardening-macos/)
-
-## Observations
-
-This uses `brew` to install a lot of the software. So please run these commands once in a while.
+Environment variables override options, for example:
 
 ```bash
-brew update # updates brew
-brew upgrade # update brewed software
-brew cleanup # remove old versions
+GIT_NAME="Claudio" GIT_EMAIL="you@example.com" bash setup-mac.sh
 ```
+
+## Results and reruns
+
+Each item prints `INSTALLED`, `PRESENT`, `CONFIGURED`, `PRESERVED`, `SKIPPED`, `FAILED`, or `BLOCKED`.
+Successful results are checked; installed apps still need manual launch and permission checks.
+Raw command logs and `results.tsv` go to the printed `~/Library/Logs/mac-setup/run-*` directory.
+Use `--verbose` to also print command logs. Clean progress output and maintained files stay within 120 columns.
+
+Reruns preserve personal settings and existing Homebrew package versions. Dependencies may still be installed.
+Matching managed Python, pi, gopls, and extensions are verified without reinstalling or upgrading them.
+With unchanged inputs, successful reruns leave configuration contents, permissions, and timestamps unchanged.
+Logs are new on each run. External app/OS updates and third-party installer side effects are outside this contract.
+Use `UPDATE_HOMEBREW=1` for an explicit metadata refresh; use exact Python versions for reproducibility.
+Versions are not pinned. No uninstall or cleanup runs. Failures return a nonzero exit; fix the cause and rerun.
+A lock prevents overlapping runs; after interruption, verify no setup is running before removing a stale lock.
+
+## Individual tasks
+
+Run a task directly, for example `bash scripts/python.sh`. It loads its own settings and logs results.
+Missing prerequisites are reported; install them or run the full setup first.
+
+## Finish and maintain
+
+Follow the printed [finishing checklist](config/finish.txt) for sign-ins, permissions, and optional steps.
+Existing VS Code/Ghostty files are preserved; back them up and copy templates manually to apply later changes.
+The old `setup.sh` and `files/` templates have been replaced. Use the command above.
+Run repository checks with `bash scripts/check.sh`; tests use mocks and never install software.

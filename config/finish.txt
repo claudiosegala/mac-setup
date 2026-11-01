@@ -1,0 +1,9 @@
+Finishing steps (installation never opens login flows):
+- Open a new terminal for PATH changes; enter your Git name/email if left blank.
+- Sign in to Codex, Claude Code and pi when you first launch each tool.
+- Sign in to Google Drive, Spotify, messaging apps and NordVPN.
+- Grant Accessibility to Raycast/Rectangle/Maccy if requested.
+- Grant microphone permissions to Zoom and TypeWhisper if requested.
+- Configure YubiKey accounts in Yubico Authenticator.
+- Open https://meet.google.com/ for Meet; optionally install its Chrome web app.
+- Rust toolchain is optional: INSTALL_RUST_TOOLCHAIN=1 bash setup-mac.sh.

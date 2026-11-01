@@ -1,0 +1,15 @@
+name: Check setup
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Install validation tools
+        run: brew install shellcheck
+      - name: Check syntax, formatting, templates, and simulated setup
+        run: bash scripts/check.sh
