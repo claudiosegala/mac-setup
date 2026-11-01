@@ -1,0 +1,7 @@
+# Native Zsh, readable font, opaque background, system appearance.
+font-family = Menlo
+font-size = 14
+background-opacity = 1
+window-padding-x = 8
+window-padding-y = 8
+theme = dark:Catppuccin Frappe,light:Catppuccin Latte
