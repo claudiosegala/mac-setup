@@ -45,3 +45,4 @@ Missing prerequisites are reported; install them or run the full setup first.
 Follow the printed [finishing checklist](config/finish.txt) for sign-ins, permissions, and optional steps.
 Existing VS Code/Ghostty files are preserved; back them up and copy templates manually to apply later changes.
 The old `setup.sh` and `files/` templates have been replaced. Use the command above.
+Run repository checks with `bash scripts/check.sh`; tests use mocks and never install software.
