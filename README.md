@@ -31,7 +31,10 @@ Raw command logs and `results.tsv` go to the printed `~/Library/Logs/mac-setup/r
 Use `--verbose` to also print command logs. Clean progress output and maintained files stay within 120 columns.
 
 Reruns preserve personal settings and existing Homebrew package versions. Dependencies may still be installed.
-An existing Python or pi installation is verified; Python defaults are configured through uv.
+Matching managed Python, pi, gopls, and extensions are verified without reinstalling or upgrading them.
+With unchanged inputs, successful reruns leave configuration contents, permissions, and timestamps unchanged.
+Logs are new on each run. External app/OS updates and third-party installer side effects are outside this contract.
+Use `UPDATE_HOMEBREW=1` for an explicit metadata refresh; use exact Python versions for reproducibility.
 Versions are not pinned. No uninstall or cleanup runs. Failures return a nonzero exit; fix the cause and rerun.
 A lock prevents overlapping runs; after interruption, verify no setup is running before removing a stale lock.
 

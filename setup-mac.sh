@@ -29,7 +29,11 @@ fi
 # Bootstrap is required; other tasks independently report failures and blocked prerequisites.
 /bin/bash "$SETUP_ROOT/scripts/bootstrap.sh" || die 'Bootstrap failed; remaining tasks cannot run'
 find_brew || die 'Homebrew was not found after bootstrap'
-if run_logged 'Update Homebrew metadata' "$BREW" update; then result CONFIGURED 'Homebrew metadata'; fi
+if [ "$UPDATE_HOMEBREW" = 1 ]; then
+  if run_logged 'Update Homebrew metadata' "$BREW" update; then result CONFIGURED 'Homebrew metadata'; fi
+else
+  result SKIPPED 'Homebrew metadata update (set UPDATE_HOMEBREW=1 to opt in)'
+fi
 for task in packages python pi shell git templates vscode ghostty; do
   /bin/bash "$SETUP_ROOT/scripts/$task.sh" || true
 done

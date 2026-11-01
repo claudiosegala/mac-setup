@@ -18,7 +18,10 @@ find_brew() {
   else return 1; fi
   export BREW
   eval "$("$BREW" shellenv)"
-  export PATH="$HOME/.local/bin:$PATH"
+  case ":$PATH:" in
+    *":$HOME/.local/bin:"*) ;;
+    *) export PATH="$HOME/.local/bin:$PATH";;
+  esac
   export HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_INSTALL_UPGRADE=1
   export HOMEBREW_NO_ENV_HINTS=1 NONINTERACTIVE=1
 }
@@ -95,11 +98,27 @@ copy_if_missing() {
 append_once() {
   local target=$1 line=$2 label=${3:-$1} status=PRESENT
   mkdir -p "$(dirname "$target")"
-  touch "$target"
+  [ -e "$target" ] || [ -L "$target" ] || : > "$target"
   if ! /usr/bin/grep -Fqx -- "$line" "$target"; then
     printf '\n%s\n' "$line" >> "$target"
     status=CONFIGURED
   fi
   /usr/bin/grep -Fqx -- "$line" "$target" || die "Verification failed: $label"
+  result "$status" "$label"
+}
+
+# Only rewrite generated, setup-owned files when their contents or required mode differ.
+copy_if_changed() {
+  local source=$1 target=$2 label=$3 executable=${4:-0} status=PRESENT
+  mkdir -p "$(dirname "$target")"
+  if ! cmp -s "$source" "$target"; then
+    cp "$source" "$target"
+    status=CONFIGURED
+  fi
+  if [ "$executable" = 1 ] && [ ! -x "$target" ]; then
+    chmod +x "$target"
+    status=CONFIGURED
+  fi
+  cmp -s "$source" "$target" || die "Verification failed: $label"
   result "$status" "$label"
 }

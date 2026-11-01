@@ -60,6 +60,29 @@ class SetupTests(unittest.TestCase):
         self.assertFalse((self.home / 'Library/Logs/mac-setup/running.lock').exists())
         self.assertTrue(all(len(line) <= 120 for line in process.stdout.splitlines()), process.stdout)
 
+    def home_snapshot(self):
+        snapshot = {}
+        for path in self.home.rglob('*'):
+            relative = path.relative_to(self.home)
+            if relative.parts[:2] == ('Library', 'Logs'):
+                continue
+            metadata = path.lstat()
+            if path.is_symlink():
+                data = ('link', os.readlink(path))
+            elif path.is_file():
+                data = ('file', path.read_bytes())
+            else:
+                continue
+            snapshot[str(relative)] = (data, metadata.st_mode, metadata.st_mtime_ns)
+        return snapshot
+
+    def assert_no_installations(self, calls):
+        self.assertFalse(any(call[:2] in (
+            ['brew', 'install'], ['brew', 'upgrade'], ['brew', 'update'], ['npm', 'install'],
+            ['npm', 'rebuild'], ['go', 'install'], ['code', '--install-extension'],
+        ) or call[:3] == ['uv', 'python', 'install'] or (call[:2] == ['brew', 'tap'] and len(call) > 2)
+            for call in calls), calls)
+
     def test_fresh_setup_and_repeat_run(self):
         first = self.run_script()
         self.assert_success(first)
@@ -73,10 +96,18 @@ class SetupTests(unittest.TestCase):
         self.assertIn('--appdir=' + str(self.apps), next(
             call for call in self.call_list() if call[:3] == ['brew', 'install', '--cask']
         ))
+        snapshot = self.home_snapshot()
         initial_calls = len(self.call_list())
         second = self.run_script()
         self.assert_success(second)
         new_calls = self.call_list()[initial_calls:]
+        self.assertEqual(self.home_snapshot(), snapshot)
+        self.assert_no_installations(new_calls)
+        third = self.run_script(LATEST_PYTHON='3.15.0')
+        self.assert_success(third)
+        self.assertEqual(self.home_snapshot(), snapshot)
+        self.assert_no_installations(self.call_list()[initial_calls:])
+        self.assertFalse(any(row.startswith(('INSTALLED\t', 'CONFIGURED\t')) for row in self.records()))
         self.assertFalse(any(call[:2] == ['brew', 'install'] for call in new_calls))
         self.assertFalse(any(call[:2] == ['npm', 'install'] for call in new_calls))
         self.assertFalse(any(call[:2] == ['code', '--install-extension'] for call in new_calls))
@@ -86,6 +117,97 @@ class SetupTests(unittest.TestCase):
         # Full installer output stays intact in logs despite wrapped status output.
         logs = list((self.home / 'Library/Logs/mac-setup').glob('run-*/*.log'))
         self.assertTrue(any('x' * 180 in log.read_text() for log in logs))
+
+    def test_each_standalone_task_is_idempotent(self):
+        tasks = ('bootstrap', 'packages', 'python', 'pi', 'shell', 'git', 'templates', 'vscode', 'ghostty')
+        for task in tasks:
+            with self.subTest(task=task):
+                self.assert_success(self.run_script('scripts/' + task + '.sh'))
+                snapshot = self.home_snapshot()
+                initial_calls = len(self.call_list())
+                self.assert_success(self.run_script('scripts/' + task + '.sh'))
+                self.assertEqual(self.home_snapshot(), snapshot)
+                self.assert_no_installations(self.call_list()[initial_calls:])
+
+    def test_failed_run_recovers_without_reinstalling_successful_items(self):
+        first = self.run_script(FAIL_PACKAGE='deno', FAIL_EXTENSION='ms-python.python')
+        self.assertNotEqual(first.returncode, 0)
+        snapshot = self.home_snapshot()
+        initial_calls = len(self.call_list())
+        self.assert_success(self.run_script())
+        calls = self.call_list()[initial_calls:]
+        packages = [call[-1] for call in calls if call[:2] == ['brew', 'install']]
+        extensions = [call[-1] for call in calls if call[:2] == ['code', '--install-extension']]
+        self.assertEqual(packages, ['deno'])
+        self.assertEqual(extensions, ['ms-python.python'])
+        self.assertEqual(self.home_snapshot(), snapshot)
+        initial_calls = len(self.call_list())
+        self.assert_success(self.run_script())
+        self.assertEqual(self.home_snapshot(), snapshot)
+        self.assert_no_installations(self.call_list()[initial_calls:])
+
+    def test_missing_python_default_is_repaired_without_downloading_python(self):
+        self.assert_success(self.run_script('scripts/python.sh'))
+        default = self.home / '.local/bin/python3'
+        default.unlink()
+        initial_calls = len(self.call_list())
+        self.assert_success(self.run_script('scripts/python.sh'))
+        self.assertTrue(default.is_symlink())
+        self.assert_no_installations(self.call_list()[initial_calls:])
+        snapshot = self.home_snapshot()
+        self.assert_success(self.run_script('scripts/python.sh'))
+        self.assertEqual(self.home_snapshot(), snapshot)
+
+    def test_explicit_python_version_change_retargets_only_owned_defaults(self):
+        self.assert_success(self.run_script('scripts/python.sh', PYTHON_VERSION='3.13.0'))
+        self.assert_success(self.run_script('scripts/python.sh', PYTHON_VERSION='3.14.0'))
+        for name in ('python', 'python3'):
+            self.assertIn('/3.14.0/', os.readlink(self.home / '.local/bin' / name))
+        snapshot = self.home_snapshot()
+        initial_calls = len(self.call_list())
+        self.assert_success(self.run_script('scripts/python.sh', PYTHON_VERSION='3.14.0'))
+        self.assertEqual(self.home_snapshot(), snapshot)
+        self.assert_no_installations(self.call_list()[initial_calls:])
+
+    def test_conflicting_python_command_is_not_overwritten(self):
+        default = self.home / '.local/bin/python'
+        default.parent.mkdir(parents=True)
+        default.write_text('personal command\n')
+        before = (default.read_bytes(), default.stat().st_mtime_ns)
+        process = self.run_script('scripts/python.sh')
+        self.assertNotEqual(process.returncode, 0)
+        self.assertIn('Python default conflicts', process.stdout)
+        self.assertEqual((default.read_bytes(), default.stat().st_mtime_ns), before)
+
+    def test_registered_pi_with_missing_command_is_repaired_without_upgrade(self):
+        self.assert_success(self.run_script('scripts/pi.sh'))
+        (self.home / '.local/bin/pi').unlink()
+        initial_calls = len(self.call_list())
+        self.assert_success(self.run_script('scripts/pi.sh'))
+        calls = self.call_list()[initial_calls:]
+        self.assertTrue(any(call[:2] == ['npm', 'rebuild'] for call in calls))
+        self.assertFalse(any(call[:2] == ['npm', 'install'] for call in calls))
+        snapshot = self.home_snapshot()
+        initial_calls = len(self.call_list())
+        self.assert_success(self.run_script('scripts/pi.sh'))
+        self.assertEqual(self.home_snapshot(), snapshot)
+        self.assert_no_installations(self.call_list()[initial_calls:])
+
+    def test_duplicate_extension_entry_does_not_install_twice(self):
+        manifest = self.repo / 'config/vscode/extensions.txt'
+        manifest.write_text(manifest.read_text() + '\nms-python.python\n')
+        self.assert_success(self.run_script('scripts/vscode.sh'))
+        installs = [call for call in self.call_list() if call[:2] == ['code', '--install-extension']]
+        self.assertEqual(sum(call[-1] == 'ms-python.python' for call in installs), 1)
+
+    def test_shell_environment_does_not_duplicate_path_entries(self):
+        self.assert_success(self.run_script('scripts/shell.sh'))
+        envfile = self.home / '.config/mac-setup/env.sh'
+        process = subprocess.run(
+            ['/bin/bash', '-c', '. "$1"; . "$1"; printf "%s\\n" "$PATH"', 'check', str(envfile)],
+            env=self.env, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True,
+        )
+        self.assertEqual(process.stdout.strip().split(':').count(str(self.home / '.local/bin')), 1)
 
     def test_existing_personal_settings_are_preserved(self):
         user = self.home / 'Library/Application Support/Code/User'
@@ -158,7 +280,7 @@ class SetupTests(unittest.TestCase):
         self.assertIn('advisory warnings', process.stdout)
 
     def test_metadata_update_failure_is_not_hidden(self):
-        process = self.run_script(FAIL_UPDATE='1')
+        process = self.run_script(FAIL_UPDATE='1', UPDATE_HOMEBREW='1')
         self.assertNotEqual(process.returncode, 0)
         self.assertIn('[FAILED] Update Homebrew metadata', process.stdout)
         self.assertIn('[CONFIGURED] C++ starter', process.stdout)

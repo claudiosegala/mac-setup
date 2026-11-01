@@ -11,7 +11,10 @@ git_setting() {
     result PRESERVED "Git $key: $current"
     return
   fi
-  [ "$current" != "$value" ] || status=PRESENT
+  if [ "$current" = "$value" ]; then
+    result PRESENT "Git $key: $value"
+    return
+  fi
   git config --global "$key" "$value"
   [ "$(git config --global --get "$key")" = "$value" ] || die "Git verification failed: $key"
   result "$status" "Git $key: $value"

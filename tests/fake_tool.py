@@ -39,7 +39,8 @@ elif name == 'node':
     sys.exit(subprocess.call([os.environ['REAL_NODE'], *args]))
 elif name == 'brew':
     if args == ['shellenv']:
-        print('export PATH=' + shlex.quote(os.environ['FAKE_BIN'] + ':' + os.environ['PATH']))
+        paths = dict.fromkeys([os.environ['FAKE_BIN'], *os.environ['PATH'].split(':')])
+        print('export PATH=' + shlex.quote(':'.join(paths)))
     elif args == ['--version']:
         if os.environ.get('FAIL_BOOTSTRAP'):
             fail()
@@ -82,23 +83,34 @@ elif name == 'brew':
     else:
         raise RuntimeError(args)
 elif name == 'uv':
-    interpreter = home / '.local/share/uv/python/bin/python3'
+    request = args[2]
+    versions = state.get('pythons', [])
+    matching = [v for v in versions if v == request or v.startswith(request + '.')]
     if args[:2] == ['python', 'find']:
+        if not matching:
+            sys.exit(1)
+        version = sorted(matching, key=lambda v: tuple(map(int, v.split('.'))))[-1]
+        interpreter = home / '.local/share/uv/python' / version / 'bin/python3'
         if not interpreter.exists():
             sys.exit(1)
         print(interpreter)
     elif args[:2] == ['python', 'install']:
         if os.environ.get('FAIL_PYTHON'):
             fail()
-        executable(interpreter, 'Python 3.14.0')
-        for default in ('python', 'python3'):
-            executable(home / '.local/bin' / default, 'Python 3.14.0')
+        version = request if re.fullmatch(r'\d+\.\d+\.\d+', request) else os.environ.get('LATEST_PYTHON', '3.14.0')
+        interpreter = home / '.local/share/uv/python' / version / 'bin/python3'
+        executable(interpreter, 'Python ' + version)
+        state.setdefault('pythons', []).append(version)
+        save()
+        if '--no-bin' not in args:
+            for default in ('python', 'python3'):
+                executable(home / '.local/bin' / default, 'Python ' + version)
     else:
         raise RuntimeError(args)
 elif name == 'npm':
     if args[0] == 'list':
         sys.exit(0 if state.get('pi') else 1)
-    elif args[0] == 'install':
+    elif args[0] in ('install', 'rebuild'):
         executable(home / '.local/bin/pi', 'pi 1.0.0')
         state['pi'] = True
         save()

@@ -41,7 +41,10 @@ while IFS= read -r extension || [ -n "$extension" ]; do
   fi
   if run_logged "Verify extension $extension" "$code" --list-extensions --show-versions; then
     version=$(/usr/bin/grep -Ei "^${extension//./\\.}@" "$LAST_LOG" || true)
-    if [ -n "$version" ]; then result "$status" "VS Code extension: $version" "$LAST_LOG"
+    if [ -n "$version" ]; then
+      result "$status" "VS Code extension: $version" "$LAST_LOG"
+      installed="$installed
+$extension"
     else result FAILED "VS Code extension not found: $extension" "$LAST_LOG"; failed=1; fi
   else failed=1; fi
 done < "$SETUP_ROOT/config/vscode/extensions.txt"
